@@ -1403,18 +1403,18 @@ public class CSVParserTest {
     }
 }
 
-    private void invokeParseWithException(CSVFormat csvFormat, String input) throws IOException {
-    try (CSVParser parser = csvFormat.parse(new StringReader(input))) {
-        parser.nextRecord();
-    }
-}
-
     @Test
     public void testParseWithQuoteThrowsException() {
     final CSVFormat csvFormat = CSVFormat.DEFAULT.withQuote('\'');
-    assertThrows(IOException.class, () -> invokeParseWithException(csvFormat, "a,b,c,'"));
-    assertThrows(IOException.class, () -> invokeParseWithException(csvFormat, "a,b,c'abc,xyz"));
-    assertThrows(IOException.class, () -> invokeParseWithException(csvFormat, "abc'a,b,c',xyz"));
+
+    // Input with an unclosed quote
+    assertThrows(IOException.class, () -> invokeParseWithException(csvFormat, "a,b,c,'unclosed"));
+
+    // Input with mismatched quotes
+    assertThrows(IOException.class, () -> invokeParseWithException(csvFormat, "a,'b,c,xyz"));
+
+    // Input with nested quotes that may confuse the parser
+    assertThrows(IOException.class, () -> invokeParseWithException(csvFormat, "a,'b,c','d"));
 }
 
 

@@ -171,8 +171,7 @@ final class ExtendedBufferedReader extends UnsynchronizedBufferedReader {
             if (current == CR) {
                 final int next = peek();
                 if (next == LF) {
-                     int ignoredChar = read(); // Store the return value to clarify its purpose
-              // Optionally add a comment if the value is intentionally ignored
+                    read(); //consume the LF character 
 }
 
             }

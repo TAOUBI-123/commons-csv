@@ -1,5 +1,8 @@
 package org.apache.commons.csv;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements. See the NOTICE file distributed with
@@ -18,8 +21,12 @@ package org.apache.commons.csv;
  */
 
 public class Main {
+    // Adding a logger
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
+
     public static void main(String[] args) {
-        System.out.println("Hello, Apache Commons CSV!");
+        // Replace System.out.println with logger
+        logger.info("Hello, Apache Commons CSV!");
     }
 }
 
